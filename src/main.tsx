@@ -1,7 +1,5 @@
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
+import MainLayout from './layouts/MainLayout/MainLayout';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <div>
-    <h1>a</h1>
-  </div>
-)
+ReactDOM.createRoot(document.getElementById('root')!).render(<MainLayout />)
