@@ -13,6 +13,16 @@
     width: 100%;
 }
 
+.category a {
+    text-transform: capitalize;
+    text-decoration: none;
+    color: #000;
+}
+
+.category a:hover {
+    text-decoration: underline;
+}
+
 .categoryTitle {
     text-align: center;
     font-size: 14px;

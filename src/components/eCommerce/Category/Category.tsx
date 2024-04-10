@@ -1,16 +1,16 @@
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 const { category, categoryImg, categoryTitle } = styles;
 
-const Category = () => {
+const Category = ({ categoryData }: { categoryData: TCategory }) => {
   return (
     <div className={category}>
-      <div className={categoryImg}>
-        <img
-          src="https://cdn-eu.dynamicyield.com/api/9876644/images/244c68ad42d8b__hp-w12-22032022-h_m-women_shirts-blouses.jpg"
-          alt="categoryImg"
-        />
-      </div>
-      <h4 className={categoryTitle}>Title</h4>
+      <Link to={`/categories/products/${categoryData.prefix}`}>
+        <div className={categoryImg}>
+          <img src={categoryData.img} alt={categoryData.title} />
+        </div>
+        <h4 className={categoryTitle}>{categoryData.title}</h4>
+      </Link>
     </div>
   );
 };
