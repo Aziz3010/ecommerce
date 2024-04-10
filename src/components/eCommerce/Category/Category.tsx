@@ -9,7 +9,9 @@ const Category = ({ categoryData }: { categoryData: TCategory }) => {
         <div className={categoryImg}>
           <img src={categoryData.img} alt={categoryData.title} />
         </div>
-        <h4 className={categoryTitle}>{categoryData.title}</h4>
+        <h4 title={categoryData.title} className={categoryTitle}>
+          {categoryData.title}
+        </h4>
       </Link>
     </div>
   );

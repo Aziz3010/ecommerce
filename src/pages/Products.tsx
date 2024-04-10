@@ -2,15 +2,21 @@ import { Col, Container, Row } from "react-bootstrap"
 import Product from "../components/eCommerce/Product/Product"
 import { useAppDispatch, useAppSelector } from "../store/hook"
 import { useEffect } from "react";
-import { actGetProductsByCatPrefix } from "../store/products/productsSlice";
+import { actGetProductsByCatPrefix, productsCleanUp } from "../store/products/productsSlice";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
+  const params = useParams();
   const dispatch = useAppDispatch();
-  const {records, loading, error} = useAppSelector((state) => state.products);
+  const {records} = useAppSelector((state) => state.products);
 
   useEffect(()=>{
-    dispatch(actGetProductsByCatPrefix());
-  }, [dispatch]);
+    dispatch(actGetProductsByCatPrefix(params?.prefix || ""));
+
+    return () => {
+      dispatch(productsCleanUp());
+    };
+  }, [dispatch, params]);
 
   return (
     <Container>
