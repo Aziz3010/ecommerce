@@ -1,30 +1,33 @@
-import { Col, Container, Row } from "react-bootstrap"
-import Category from "../components/eCommerce/Category/Category"
+import { Container } from "react-bootstrap";
+import Category from "../components/eCommerce/Category/Category";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import actGetCategories from "../store/categories/act/actGetCategories";
 import { useEffect } from "react";
+import Status from "../components/feedback/Status/Status";
+import GridList from "../components/common/GridList/GridList";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
-  const {records} = useAppSelector((state) => state.categories);
+  const { records, loading, error } = useAppSelector(
+    (state) => state.categories
+  );
 
-  useEffect(()=>{
-    if(!records?.length) {
+  useEffect(() => {
+    if (!records?.length) {
       dispatch(actGetCategories());
     }
   }, [dispatch, records]);
 
   return (
     <Container>
-      <Row>
-        {records?.map((record: TCategory) => (
-          <Col key={record.id} xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-            <Category categoryData={record} />
-          </Col>
-        ))}
-      </Row>
+      <Status status={loading} error={error}>
+        <GridList
+          records={records}
+          renderItem={(record) => <Category categoryData={record} />}
+        />
+      </Status>
     </Container>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

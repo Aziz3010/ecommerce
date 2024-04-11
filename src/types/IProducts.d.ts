@@ -8,6 +8,6 @@ type TProduct = {
 
 interface IProductsState {
     records: TProduct[],
-    loading: "idle" | "pending" | "succeded" | "failed",
-    error: string | null
+    loading: TLoading,
+    error: TError
 };

@@ -7,6 +7,6 @@ type TCategory = {
 
 interface ICategoriesState {
     records: TCategory[],
-    loading: "idle" | "pending" | "succeded" | "failed",
-    error: string | null
+    loading: TLoading,
+    error: TError
 };
