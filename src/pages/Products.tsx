@@ -9,6 +9,7 @@ import {
 import { useParams } from "react-router-dom";
 import Status from "../components/feedback/Status/Status";
 import GridList from "../components/common/GridList/GridList";
+import Heading from "../components/common/Heading/Heading";
 
 const Products = () => {
   const params = useParams();
@@ -26,6 +27,8 @@ const Products = () => {
   return (
     <Container>
       <Status status={loading} error={error}>
+        <Heading headingText={`${params?.prefix} products`} />
+
         <GridList
           records={records}
           renderItem={(record) => <Product productData={record} />}

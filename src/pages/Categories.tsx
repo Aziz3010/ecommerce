@@ -5,6 +5,7 @@ import actGetCategories from "../store/categories/act/actGetCategories";
 import { useEffect } from "react";
 import Status from "../components/feedback/Status/Status";
 import GridList from "../components/common/GridList/GridList";
+import Heading from "../components/common/Heading/Heading";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const Categories = () => {
   return (
     <Container>
       <Status status={loading} error={error}>
+        <Heading headingText="categories" />
         <GridList
           records={records}
           renderItem={(record) => <Category categoryData={record} />}
