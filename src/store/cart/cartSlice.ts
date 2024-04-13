@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import actGetCart from "./act/actGetCart";
+import actGetProductsByItems from "./act/actGetProductsByItems";
 
 const initialState: TCartInitialState = {
     items: {},
-    productFullInfo: [],
+    productsFullInfo: [],
+    loading: "idle",
+    error: null
 };
 
 const cartSlice = createSlice({
@@ -18,24 +20,31 @@ const cartSlice = createSlice({
                 state.items[id] = 1;
             }
         },
+        cartItemChangeQuantity: (state, action) => {
+            state.items[action.payload.id] = action.payload.quantity;
+        },
+        cartItemRemove: (state, action) => {
+            delete state.items[action.payload];
+            state.productsFullInfo = state.productsFullInfo.filter((product) => product.id !== action.payload);
+        },
     },
-    // extraReducers: (builder)=>{
-    // builder.addCase(actGetCart.pending, ()=>{
-    //     // state.loading = "pending"
-    //     // state.error = null
-    // });
-    // builder.addCase(actGetCart.fulfilled, (state, action)=>{
-    //     // state.loading = "succeded"
-    //     // state.records = action.payload;
-    // });
-    // builder.addCase(actGetCart.rejected, (state, action)=>{
-    //     // state.loading = "failed"
-    //     if(action.payload && typeof action.payload === "string") {
-    //         // state.error = action.payload;
-    //     }
-    // });
-    // }
+    extraReducers: (builder) => {
+        builder.addCase(actGetProductsByItems.pending, (state) => {
+            state.loading = "pending"
+            state.error = null
+        });
+        builder.addCase(actGetProductsByItems.fulfilled, (state, action) => {
+            state.loading = "succeded"
+            state.productsFullInfo = action.payload;
+        });
+        builder.addCase(actGetProductsByItems.rejected, (state, action) => {
+            state.loading = "failed"
+            if (action.payload && typeof action.payload === "string") {
+                state.error = action.payload;
+            }
+        });
+    }
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, cartItemChangeQuantity, cartItemRemove } = cartSlice.actions;
 export default cartSlice.reducer;
