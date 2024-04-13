@@ -1,11 +1,11 @@
 type TProduct = {
     id: number;
     title: string;
-    price: string;
+    price: number;
     max: number;
     cat_prefix: string;
     img: string;
-    quatitiy?: number;
+    quantity?: number;
 };
 
 interface IProductsState {

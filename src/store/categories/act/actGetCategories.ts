@@ -3,7 +3,7 @@ import axios from "axios";
 
 const actGetCategories = createAsyncThunk("categories/actGetCategories", async (_, thunkAPI) => {
     const {rejectWithValue} = thunkAPI;
-    const URL = `${import.meta.env.VITE_BASE_BACKEND_URL}/categories`;
+    const URL = `/categories`;
     try {
         const response = await axios.get<TCategory[]>(URL);
         const data = response?.data;

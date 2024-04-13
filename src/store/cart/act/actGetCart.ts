@@ -3,7 +3,7 @@ import axios from "axios";
 
 const actGetCart = createAsyncThunk("cart/actGetCart", async (_, thunkAPI)=>{
     const {rejectWithValue} = thunkAPI;
-    const URL = `${import.meta.env.VITE_BASE_BACKEND_URL}/cart`;
+    const URL = `/cart`;
     try {
         const response = await axios.get<TProduct[]>(URL);
         const data = response?.data;

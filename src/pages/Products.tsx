@@ -15,6 +15,12 @@ const Products = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
   const { records, loading, error } = useAppSelector((state) => state.products);
+  const cartItems = useAppSelector((state) => state.cart.items);
+
+  const productsFullInfo = records.map((el) => ({
+    ...el,
+    quantity: cartItems[el.id] || 0,
+  }));
 
   useEffect(() => {
     dispatch(actGetProductsByCatPrefix(params?.prefix || ""));
@@ -30,7 +36,7 @@ const Products = () => {
         <Heading headingText={`${params?.prefix} products`} />
 
         <GridList
-          records={records}
+          records={productsFullInfo}
           renderItem={(record) => <Product productData={record} />}
         />
       </Status>

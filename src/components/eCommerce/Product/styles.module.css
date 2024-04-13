@@ -31,12 +31,7 @@
     font-size: 13px;
 }
 
-.product h4 {
-    font-size: 10px;
-}
-
-.productPriceAndMax {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.maximumNotice {
+    font-size: 12px;
+    margin-bottom: 7px;
 }

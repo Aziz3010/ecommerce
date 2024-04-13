@@ -3,11 +3,14 @@ import styles from "./styles.module.css";
 import { addToCart } from "../../../store/cart/cartSlice";
 import { useAppDispatch } from "../../../store/hook";
 import { useEffect, useState } from "react";
-const { product, productImg, productPriceAndMax } = styles;
+const { product, productImg, maximumNotice } = styles;
 
 const Product = ({ productData }: { productData: TProduct }) => {
   const dispatch = useAppDispatch();
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const currentRemainingQuantity = productData?.max - (productData?.quantity ?? 0);
+  const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
 
   const addToCartHandler = () => {
     dispatch(addToCart(productData?.id));
@@ -28,16 +31,18 @@ const Product = ({ productData }: { productData: TProduct }) => {
         <img src={productData?.img} alt={productData?.title} />
       </div>
       <h2 title={productData?.title}>{productData?.title}</h2>
-      <div className={productPriceAndMax}>
-        <h3>{productData?.price}</h3>
-        {/* <h4>Available: {productData?.max}</h4> */}
-      </div>
+      <h3>{productData?.price.toFixed(2)} EGP</h3>
+      <p className={maximumNotice}>
+        {quantityReachedToMax
+          ? "You reach to the limit"
+          : `You can add ${currentRemainingQuantity} item(s)`}
+      </p>
 
       <Button
         onClick={addToCartHandler}
         variant="info"
         style={{ color: "white" }}
-        disabled={isDisabled}
+        disabled={isDisabled || quantityReachedToMax}
       >
         {isDisabled ? (
           <>

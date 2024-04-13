@@ -3,7 +3,7 @@ import axios from "axios";
 
 const actGetProductsByCatPrefix = createAsyncThunk("products/actGetProductsByCatPrefix", async (prefix: string, thunkAPI) => {
     const {rejectWithValue} = thunkAPI;
-    const URL = `${import.meta.env.VITE_BASE_BACKEND_URL}/products?cat_prefix=${prefix}`;
+    const URL = `/products?cat_prefix=${prefix}`;
 
     try {
         const response = await axios.get<TProduct[]>(URL);
