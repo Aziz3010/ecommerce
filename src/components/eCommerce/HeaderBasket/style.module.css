@@ -1,7 +1,11 @@
 .basketContainer {
-    position: relative;
     cursor: pointer;
-    align-self: flex-end;
+    display: flex;
+    align-items: center;
+}
+
+.basketCart {
+    position: relative;
 }
 
 .basketQuantity {
@@ -17,6 +21,12 @@
     font-size: 12px;
 }
 
+.basketContainer h3 {
+    font-size: 17px;
+    margin-left: 6px;
+    margin-bottom: 0;
+}
+
 .pumpBasketQuantity {
     animation: pumping 300ms ease-out;
 }
@@ -25,15 +35,19 @@
     0% {
         transform: scale(1);
     }
+
     20% {
         transform: scale(.8);
     }
+
     30% {
         transform: scale(1.1);
     }
+
     50% {
         transform: scale(1.7);
     }
+
     100% {
         transform: scale(1);
     }
